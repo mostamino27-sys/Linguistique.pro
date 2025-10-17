@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme des Sciences du Langage</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1e40af;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: white;
+            color: #1e40af;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #1a202c;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .course-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .course-header {
+            background: #f8fafc;
+            padding: 25px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .course-header h3 {
+            font-size: 22px;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .course-meta {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .course-body {
+            padding: 25px;
+        }
+
+        .course-body ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .course-body li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .course-body li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .support-section {
+            background: #f8fafc;
+            padding: 60px 20px;
+        }
+
+        .support-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .support-header {
+            background: #1e40af;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .support-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .support-body {
+            padding: 30px;
+        }
+
+        .chat-messages {
+            height: 450px;
+            overflow-y: auto;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            max-width: 85%;
+            line-height: 1.6;
+        }
+
+        .tutor-message {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .student-message {
+            background: #1e40af;
+            color: white;
+            margin-left: auto;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #1e40af;
+        }
+
+        .input-group button {
+            padding: 14px 28px;
+            background: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .input-group button:hover {
+            background: #1e3a8a;
+        }
+
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .loading-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #64748b;
+            border-radius: 50%;
+            margin: 0 3px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 32px; }
+            .courses-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📚 Sciences du Langage</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#cours">Programmes</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="accueil">
+        <h1>Formation en Linguistique</h1>
+        <p>Plateforme complète pour l'étude des sciences du langage</p>
+        <a href="#cours" class="btn">Découvrir les programmes</a>
+    </section>
+
+    <div class="container" id="cours">
+        <h2 class="section-title">Programmes d'Études</h2>
+        <p class="section-subtitle">Formations complètes en linguistique et analyse du langage</p>
+
+        <div class="courses-grid">
+            <div class="course-card">
+                <div class="course-header">
+                    <h3>Phonétique & Phonologie</h3>
+                    <p class="course-meta">12 séances • 8 heures</p>
+                </div>
+                <div class="course-body">
+                    <ul>
+                        <li>Appareil phonatoire et production des sons</li>
+                        <li>Classification articulatoire</li>
+                        <li>Transcription phonétique (API)</li>
+                        <li>Phonèmes et allophones</li>
+                        <li>Prosodie et intonation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3>Morphologie</h3>
+                    <p class="course-meta">15 séances • 10 heures</p>
+                </div>
+                <div class="course-body">
+                    <ul>
+                        <li>Morphèmes libres et liés</li>
+                        <li>Dérivation et composition</li>
+                        <li>Flexion nominale et verbale</li>
+                        <li>Analyse morphologique</li>
+                        <li>Morphologie lexicale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3>Syntaxe</h3>
+                    <p class="course-meta">18 séances • 12 heures</p>
+                </div>
+                <div class="course-body">
+                    <ul>
+                        <li>Structure de la phrase</li>
+                        <li>Grammaire générative</li>
+                        <li>Arbres syntaxiques</li>
+                        <li>Relations grammaticales</li>
+                        <li>Typologie syntaxique</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3>Sémantique</h3>
+                    <p class="course-meta">14 séances • 9 heures</p>
+                </div>
+                <div class="course-body">
+                    <ul>
+                        <li>Théories du sens</li>
+                        <li>Relations sémantiques</li>
+                        <li>Analyse componentielle</li>
+                        <li>Champs lexicaux</li>
+                        <li>Sémantique cognitive</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3>Pragmatique</h3>
+                    <p class="course-meta">10 séances • 7 heures</p>
+                </div>
+                <div class="course-body">
+                    <ul>
+                        <li>Actes de langage</li>
+                        <li>Implicatures conversationnelles</li>
+                        <li>Deixis et référence</li>
+                        <li>Principe de coopération</li>
+                        <li>Politesse linguistique</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3>Sociolinguistique</h3>
+                    <p class="course-meta">16 séances • 11 heures</p>
+                </div>
+                <div class="course-body">
+                    <ul>
+                        <li>Variation linguistique</li>
+                        <li>Diglossie et bilinguisme</li>
+                        <li>Politique linguistique</li>
+                        <li>Changement linguistique</li>
+                        <li>Dialectologie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="support-section" id="support">
+        <div class="container">
+            <h2 class="section-title">Support Pédagogique</h2>
+            <p class="section-subtitle">Posez vos questions et obtenez des explications détaillées</p>
+
+            <div class="support-container">
+                <div class="support-header">
+                    <h2>📖 Assistance Linguistique</h2>
+                    <p>Service de support disponible pour répondre à vos questions</p>
+                </div>
+
+                <div class="support-body">
+                    <div class="chat-messages" id="messages">
+                        <div class="message tutor-message">
+                            <strong>Support Pédagogique</strong><br><br>
+                            Bonjour! 👋<br><br>
+                            Je suis à votre disposition pour répondre à toutes vos questions concernant:<br><br>
+                            • Les concepts théoriques en linguistique<br>
+                            • L'analyse de corpus et d'exemples<br>
+                            • Les méthodologies d'analyse<br>
+                            • La compréhension des théories linguistiques<br>
+                            • Les applications pratiques<br><br>
+                            N'hésitez pas à me poser vos questions!
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="questionInput" placeholder="Posez votre question ici..." onkeypress="if(event.key==='Enter') askQuestion()">
+                        <button onclick="askQuestion()">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Plateforme des Sciences du Langage. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const API_KEY = "AIzaSyAhnXx65TPfrO5Sm6uibipVt0Tj-_ovsKA";
+        const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
+        async function askQuestion() {
+            const input = document.getElementById('questionInput');
+            const question = input.value.trim();
+            if (!question) return;
+
+            addMessage(question, 'student');
+            input.value = '';
+
+            const loading = addMessage('<span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span> Préparation de la réponse...', 'tutor');
+
+            try {
+                const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `Tu es un expert en linguistique et sciences du langage. Réponds à cette question de manière académique, claire et pédagogique en français. N'utilise JAMAIS les termes "IA", "AI", "intelligence artificielle", "Gemini", "assistant virtuel" ou toute référence à être une machine. Réponds toujours à la première personne comme un professeur ou expert humain. Sois professionnel et académique.\n\nQuestion: ${question}`
+                            }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                loading.remove();
+
+                if (data.candidates && data.candidates[0]) {
+                    const answer = data.candidates[0].content.parts[0].text;
+                    addMessage('<strong>Support Pédagogique</strong><br><br>' + answer, 'tutor');
+                } else {
+                    addMessage('<strong>Support Pédagogique</strong><br><br>Désolé, une erreur technique s\'est produite. Veuillez reformuler votre question.', 'tutor');
+                }
+            } catch (error) {
+                loading.remove();
+                addMessage('<strong>Support Pédagogique</strong><br><br>Problème de connexion. Veuillez réessayer dans quelques instants.', 'tutor');
+            }
+        }
+
+        function addMessage(text, type) {
+            const container = document.getElementById('messages');
+            const msg = document.createElement('div');
+            msg.className = `message ${type}-message`;
+            msg.innerHTML = text;
+            container.appendChild(msg);
+            container.scrollTop = container.scrollHeight;
+            return msg;
+        }
+    </script>
+</body>
+</html>
